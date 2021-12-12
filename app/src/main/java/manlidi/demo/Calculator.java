@@ -24,11 +24,14 @@ public class Calculator extends AppCompatActivity {
     String op = "";
     boolean isnewop = true;
     EditText ed1;
+    private double result;
+    private Calculatrice calc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
         ed1 = findViewById(R.id.editText);
+        calc = new Calculatrice();
     }
 
     public void numberEvent(View view) {
@@ -90,19 +93,21 @@ public class Calculator extends AppCompatActivity {
 
     public void equalEvent(View view) {
         String newNumber = ed1.getText().toString();
-        double result = 0.0;
+        double val1 = Double.parseDouble(oldnumber);
+        double val2 = Double.parseDouble(newNumber);
+
         switch (op){
             case "+":
-                result = Double.parseDouble(oldnumber) + Double.parseDouble(newNumber);
+                result = calc.addition(val1, val2).toDouble();
                 break;
             case "-":
-                result = Double.parseDouble(oldnumber) - Double.parseDouble(newNumber);
+                result = calc.soustraction(val1, val2).toDouble();
                 break;
             case "*":
-                result = Double.parseDouble(oldnumber) * Double.parseDouble(newNumber);
+                result = calc.multiplication(val1, val2).toDouble();
                 break;
             case "/":
-                result = Double.parseDouble(oldnumber) / Double.parseDouble(newNumber);
+                result = calc.division(val1, val2).toDouble();
                 break;
         }
         ed1.setText(result+"");
@@ -118,4 +123,5 @@ public class Calculator extends AppCompatActivity {
         ed1.setText(no+"");
         isnewop = true;
     }
+
 }
